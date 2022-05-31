@@ -1,8 +1,6 @@
 package br.edu.pucpr.poo.foodtruck;
 
 public class Main {
-	
-	// Teste com Git
 
 	public static void main(String[] args) {
 		
