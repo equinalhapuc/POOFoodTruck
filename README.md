@@ -10,3 +10,4 @@
 - [x] Gravação e recuperação de objetos em arquivo
 - [ ] Utilização da estrutura switch para controle de menu de opções
 - [x] Utilização de tratamento de exceções para manipulação de arquivos
+- [ ] Interface gráfica
