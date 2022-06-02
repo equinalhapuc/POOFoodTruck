@@ -142,7 +142,7 @@ public class Cardapio {
 					itens.add((Lanche) input);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("Erro: " + e.getMessage());
 		}
 		return itens;
 	}
