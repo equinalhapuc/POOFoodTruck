@@ -19,7 +19,7 @@ public class Cardapio {
 		ArrayList<Item> acompanhamentos = new ArrayList<>();
 
 		for (Item item : itens) {
-			if (item.getClass().equals(Acompanhamento.class)) {
+			if (item instanceof Acompanhamento) {
 				acompanhamentos.add(item);
 			}
 		}
@@ -35,7 +35,7 @@ public class Cardapio {
 		ArrayList<Item> bebidas = new ArrayList<>();
 
 		for (Item item : itens) {
-			if (item.getClass().equals(Bebida.class)) {
+			if (item instanceof Bebida) {
 				bebidas.add(item);
 			}
 		}
@@ -51,7 +51,7 @@ public class Cardapio {
 		ArrayList<Item> lanches = new ArrayList<>();
 
 		for (Item item : itens) {
-			if (item.getClass().equals(Lanche.class)) {
+			if (item instanceof Lanche) {
 				lanches.add(item);
 			}
 		}
