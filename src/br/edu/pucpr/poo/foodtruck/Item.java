@@ -1,8 +1,16 @@
 package br.edu.pucpr.poo.foodtruck;
 
 import java.io.Serializable;
-
-public class Item implements Serializable {
+/**
+ * Classe abstrata que representa um item de cardápio
+ * <p>
+ * Qualquer item do cardápio do Food Truck
+ * @param Nome, preço, descrição
+ * @author Eduardo Quinalha
+ * @version 1.0
+ *
+ */
+public abstract class Item implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String nome;

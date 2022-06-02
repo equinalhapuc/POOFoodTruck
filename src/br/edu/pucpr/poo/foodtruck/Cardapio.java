@@ -120,7 +120,7 @@ public class Cardapio {
 
 		// "Try with resources" disponível a partir do java 1.7. O .close() e o
 		// finally() são implícitos
-		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("dados.bin"))) {
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("cardapio.bin"))) {
 			for (Item item : itens) {
 				oos.writeObject(item);
 			}
@@ -131,7 +131,7 @@ public class Cardapio {
 	
 	public ArrayList<Item> recupera(){
 		ArrayList<Item> itens = new ArrayList<>();
-		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("dados.bin"))) {
+		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("cardapio.bin"))) {
 			Object input = null;
 			while ((input = ois.readObject()) != null) {
 				if(input instanceof Acompanhamento)

@@ -2,6 +2,15 @@ package br.edu.pucpr.poo.foodtruck;
 
 import java.util.Formatter;
 
+/**
+ * Item de cardápio do tipo Acompanhamento
+ * <p>
+ * Acompanhamentos podem ser, batatas fritas, onion rings, salgados, petiscos, entre outros...
+ * @param Nome, preço, descrição
+ * @author Eduardo Quinalha
+ * @version 1.0
+ *
+ */
 public class Acompanhamento extends Item {
 
 	private static final long serialVersionUID = 1L;

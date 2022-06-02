@@ -1,7 +1,15 @@
 package br.edu.pucpr.poo.foodtruck;
 
 import java.util.Formatter;
-
+/**
+ * Item de cardápio do tipo Lanche
+ * <p>
+ * Item principal do cardápio. X-Burgueres, X-saladas, Hot-dog, pizzas, etc...
+ * @param Nome, preço, descrição
+ * @author Eduardo Quinalha
+ * @version 1.0
+ *
+ */
 public class Lanche extends Item {
 
 	private static final long serialVersionUID = 1L;
