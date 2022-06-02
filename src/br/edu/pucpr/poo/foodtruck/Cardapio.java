@@ -8,8 +8,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Formatter;
 
-import javax.print.DocFlavor.INPUT_STREAM;
-
 public class Cardapio {
 	// Polimorfismo
 	ArrayList<Item> itens = new ArrayList<>();
