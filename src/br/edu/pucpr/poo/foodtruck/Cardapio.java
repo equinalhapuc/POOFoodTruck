@@ -1,11 +1,14 @@
 package br.edu.pucpr.poo.foodtruck;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Formatter;
+
+import javax.print.DocFlavor.INPUT_STREAM;
 
 public class Cardapio {
 	// Polimorfismo
@@ -125,7 +128,7 @@ public class Cardapio {
 				oos.writeObject(item);
 			}
 		} catch (Exception e) {
-			System.out.println("Erro: " + e.getMessage());
+			System.out.println("Erro: " + e);
 		}
 	}
 	
@@ -141,8 +144,10 @@ public class Cardapio {
 				else
 					itens.add((Lanche) input);
 			}
+		} catch (EOFException e) {
+			System.out.println();
 		} catch (Exception e) {
-			System.out.println("Erro: " + e.getMessage());
+			System.out.println("Erro: " + e);
 		}
 		return itens;
 	}
