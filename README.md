@@ -56,3 +56,5 @@ Item		Quantidade		Obs
 7			1				Sem cebola
 5			2
 ```
+### Diagrama de Classes
+![POOFoodTruck](/assets/PUCPOOFoodTruck.drawio.png)
