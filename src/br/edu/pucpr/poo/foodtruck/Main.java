@@ -26,6 +26,17 @@ public class Main {
 		System.out.println(cardapio);
 		cardapio.grava();
 		System.out.println(cardapio.recupera());
+		
+		System.out.println();
+		
+		
+		for (Item item : cardapio.itens) {
+			if(item.getCodigo() == 7) {
+				System.out.println(item);
+			}
+		}
+		
+		
 	}
 
 }

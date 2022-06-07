@@ -13,6 +13,7 @@ import java.io.Serializable;
 public abstract class Item implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	private String nome;
 	static private int codigo = 1;
 	private double preco;
