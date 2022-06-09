@@ -27,6 +27,7 @@ public class Acompanhamento extends Item {
 		return descricao;
 	}
 
+	@Override
 	public int getCodigo() {
 		return codigo;
 	}
@@ -40,4 +41,5 @@ public class Acompanhamento extends Item {
 		fmt.close();
 		return output;
 	}
+	
 }

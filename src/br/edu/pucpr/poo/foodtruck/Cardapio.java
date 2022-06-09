@@ -7,10 +7,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.NoSuchElementException;
 
 public class Cardapio {
 	// Polimorfismo
-	ArrayList<Item> itens = new ArrayList<>();
+	private ArrayList<Item> itens = new ArrayList<>();
+
+	public ArrayList<Item> getItens() {
+		return itens;
+	}
 
 	/**
 	 * Retorna apenas os itens do cardápio que correspondam ao tipo Acompanhamento
@@ -89,28 +94,20 @@ public class Cardapio {
 		return cardapio;
 	}
 
-	/**
-	 * Insere um novo acompanhamento no cardápio
-	 * @return ArrayList<Item>
-	 */
-	public void insereNovoAcompanhamento(Acompanhamento acompanhamento) {
-		this.itens.add(acompanhamento);
+	public void inserirItem(Item item) {
+		this.itens.add(item);		
 	}
-
-	/**
-	 * Insere uma nova bebida no cardápio
-	 * @return void
-	 */
-	public void insereNovaBebida(Bebida bebida) {
-		this.itens.add(bebida);
-	}
-
-	/**
-	 * Insere um novo lanche no cardápio
-	 * @return void
-	 */
-	public void insereNovoLanche(Lanche lanche) {
-		this.itens.add(lanche);
+	
+	public void removerItem(int codigo) {
+		Item itemRemover = null;
+		for (Item item : itens) {
+			if(item.getCodigo() == codigo)
+				itemRemover = item;
+		}
+		
+		if(itemRemover == null)
+			throw new NoSuchElementException("Item não encontrado");
+		this.itens.remove(this.itens.indexOf(itemRemover));
 	}
 
 	/**
