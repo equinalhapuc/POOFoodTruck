@@ -33,7 +33,7 @@ public class Bebida extends Item {
 	@Override
 	public String toString() {
 		Formatter fmt = new Formatter();
-		fmt.format("%4s. %-30s R$ %.2f\n", this.getCodigo(), this.getNome() + " " + this.getTamanho(),
+		fmt.format("%4s. %-30s R$ %.2f\n", this.getCodigo(), this.getNome() + " " + this.getTamanho() + " mL",
 				this.getPreco());
 		String output = fmt.toString();
 		fmt.close();

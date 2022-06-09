@@ -8,7 +8,6 @@ public class Pedido {
 	ArrayList<Item> itens;
 
 	public Pedido(int codigo, String status) {
-		super();
 		this.codigo = codigo;
 		this.status = status;
 	}
