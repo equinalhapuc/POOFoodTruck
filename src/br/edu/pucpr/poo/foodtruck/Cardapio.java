@@ -127,7 +127,7 @@ public class Cardapio {
 		}
 	}
 	
-	public ArrayList<Item> recupera(){
+	public void recupera(){
 		ArrayList<Item> itens = new ArrayList<>();
 		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("cardapio.bin"))) {
 			Object input = null;
@@ -144,7 +144,7 @@ public class Cardapio {
 		} catch (Exception e) {
 			System.out.println("Erro: " + e);
 		}
-		return itens;
+		this.itens = itens;
 	}
 
 }
