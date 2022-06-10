@@ -7,13 +7,10 @@ import javax.swing.JOptionPane;
 
 public class FoodTruck {
 	
-	private ArrayList<Item> cardapio = new ArrayList<>();
+	private Cardapio cardapio = new Cardapio();
 
 	public FoodTruck() {
-		Cardapio cardapio = new Cardapio();
 		cardapio.recupera();
-		this.cardapio = cardapio.getItens();
-		System.out.println(cardapio);
 	}
 
 	public static void main(String[] args) {
@@ -40,13 +37,12 @@ public class FoodTruck {
 			
 			switch(opt) {
 			case 1:
-				String textoSubmenuCodigo = "Código do item\n";
-				entrada = JOptionPane.showInputDialog (cardapio.toString() + textoSubmenuCodigo + "\n\n");
+				entrada = JOptionPane.showInputDialog (cardapio.toString() + "\n\nCódigo do item\n\n");
 				int codigo = this.retornaInteiro(entrada);
 				
 				Item itemDigitado = null;
 				
-				for (Item item : cardapio) {
+				for (Item item : cardapio.getItens()) {
 					if(item.getCodigo() == codigo)
 						itemDigitado = item;
 				}
@@ -67,6 +63,7 @@ public class FoodTruck {
 			case 3:
 				break;
 			case 4:
+				entrada = JOptionPane.showInputDialog (cardapio.toString()+"\n\n");
 				break;
 			case 5:
 				break;
