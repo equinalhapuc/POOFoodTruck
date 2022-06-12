@@ -56,6 +56,9 @@ public class FoodTruck {
 				// Esta variável vai armazenar o item selecionado, caso ele exista
 				Item itemDigitado = null;
 
+				// Esta variável armazena o código de pedido digitado pelo operador
+				int codigoDigitado = -1;
+
 				// Esta variável recebe o código do item desejado, digitado pelo operador
 				int codigo = -1;
 
@@ -177,9 +180,8 @@ public class FoodTruck {
 
 			// 2- Visualizar pedido--------------------------------------------
 			case 2:
-
 				// Esta variável armazena o código digitado pelo operador
-				int codigoDigitado = 0;
+				codigoDigitado = 0;
 
 				// Reseta as variáveis do sistema
 				entrada = null;
@@ -225,8 +227,7 @@ public class FoodTruck {
 					JOptionPane.showMessageDialog(null, "\n\nPedido: " + pedido.getCodigo() + ": " + pedido.getStatus()
 							+ "\n" + resumoPedido.toString() + "\n\n", "Pedido", JOptionPane.INFORMATION_MESSAGE);
 
-					
-				// Caso o pedido não tenha sido encontrado no sistema, exibe um alerta 
+					// Caso o pedido não tenha sido encontrado no sistema, exibe um alerta
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Pedido não encontrado!", "alerta", JOptionPane.ERROR_MESSAGE);
 				}
@@ -234,11 +235,63 @@ public class FoodTruck {
 				break;
 			// Fim do código da opção 2 do menu principal: Visualizar pedido
 
+			// 3- Alterar o Status de um pedido----------------------------------
 			case 3:
+				// Esta variável armazena o código digitado pelo operador
+				codigoDigitado = 0;
+
+				// Reseta as variáveis do sistema
+				entrada = null;
+				pedido = null;
+
+				// Este looping permanece ativo enquanto o operador não digitar um valor válido
+				// para código de pedido
+				while (codigoDigitado == 0) {
+					entrada = JOptionPane.showInputDialog("Digite o código do pedido\n\n");
+					if (this.intValido(entrada))
+						codigoDigitado = Integer.parseInt(entrada);
+					else {
+						JOptionPane.showMessageDialog(null, "Insira um valor válido!", "alerta",
+								JOptionPane.ERROR_MESSAGE);
+						continue;
+					}
+
+					// Tenta localizar o pedido digitado. Caso localize, armazena o pedido na
+					// variável pedido
+					for (Pedido pesqPedido : pedidos) {
+						if (pesqPedido.getCodigo() == codigoDigitado)
+							pedido = pesqPedido;
+					}
+				}
+
+				// Tenta alterar o status do pedido
+				try {
+					
+					// Cria um vetor com as opções possíveis de status de um pedido
+					StatusPedido[] opcoes = { StatusPedido.LANCADO, StatusPedido.PREPARANDO, StatusPedido.PRONTO,
+							StatusPedido.ENTREGUE };
+					
+					// Exibe uma tela para a seleção do novo status do pedido
+					Object novoStatus = JOptionPane.showInputDialog(null, "Status do pedido: " + pedido.getStatus() + "\n\nEscolha o novo status", "Status do pedido",
+							JOptionPane.INFORMATION_MESSAGE, null, opcoes, opcoes[0]);
+					
+					// Altera o status do pedido
+					pedido.setStatus(novoStatus.toString());
+					
+				// Caso não tenha encontrado o pedido, exibe uma mensagem
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Pedido não encontrado!", "alerta", JOptionPane.ERROR_MESSAGE);
+				}
+
 				break;
+			// Fim do código da opção 3 do menu principal: Alterar o status de um pedido
+			
+			// 4- Exibe o cardápio ----------------------------------
 			case 4:
 				entrada = JOptionPane.showInputDialog(cardapio.toString() + "\n\n");
 				break;
+			// Fim do código da opção 3 do menu principal: Exibe o cardápio
+			
 			case 5:
 				break;
 			case 6:
