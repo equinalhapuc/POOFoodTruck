@@ -453,24 +453,29 @@ public class FoodTruck {
 
 			// 6- Remover item do cardápio ----------------------------------
 			case 6:
+				// Reseta as variáveis
 				entrada = null;
 				codigoDigitado = -1;
 				Item itemRemover = null;
+				
 				// Escolha o item
 				while (!intValido(entrada)) {
 					entrada = JOptionPane.showInputDialog(cardapio.toString() + "\n\nQual item deseja remover?:\n\n");
 					if (intValido(entrada)) {
 						codigoDigitado = Integer.parseInt(entrada);
 					}
+					// Se for pressionado CANCELAR a entrada é null
 					if (entrada == null)
 						break;
 				}
-
+				
+				// Localiza o item no cardápio
 				for (Item item : cardapio.getItens()) {
 					if (item.getCodigo() == codigoDigitado)
 						itemRemover = item;
 				}
 
+				// Tenta remover o item do cardápio
 				try {
 					confirma = JOptionPane.showConfirmDialog(null,
 							"O item abaixo será removido:\n\n" + itemRemover.toString() + "\n\nConfirma?", "Escolha um",
@@ -485,6 +490,7 @@ public class FoodTruck {
 								JOptionPane.INFORMATION_MESSAGE);
 						break;
 					}
+				// Caso não localize o item, exibe uma mensagem
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Item não encontrado!", "alerta", JOptionPane.ERROR_MESSAGE);
 				}
