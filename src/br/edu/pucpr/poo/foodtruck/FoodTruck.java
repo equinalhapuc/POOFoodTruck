@@ -1,6 +1,7 @@
 package br.edu.pucpr.poo.foodtruck;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import javax.swing.JOptionPane;
@@ -8,6 +9,7 @@ import javax.swing.JOptionPane;
 public class FoodTruck {
 
 	private Cardapio cardapio = new Cardapio();
+	private List<Pedido> pedidos = new ArrayList<Pedido>();
 
 	public FoodTruck() {
 		cardapio.recupera();
@@ -31,11 +33,20 @@ public class FoodTruck {
 			entrada = JOptionPane.showInputDialog(textoMenu + "\n\n");
 			opt = this.retornaInteiro(entrada);
 
+			// Avalia a entrada
 			switch (opt) {
+
+			// 1- Lançar novo pedido
+			// ------------------------------------------------------------------------------------
 			case 1:
 				int confirma = 1; // yes=0; no=1; cancel=2;
 				int continua = 0; // yes=0; no=1; cancel=2;
 				Item itemDigitado = null;
+				int codigo = -1;
+				int qtde = 0;
+				String obs = null;
+				entrada = null;
+				List<ItemPedido> itensDoPedido = new ArrayList<ItemPedido>();
 
 				do {
 					// Para a confirmação de item
@@ -43,14 +54,17 @@ public class FoodTruck {
 
 						// Validação do item do cardápio (deve ser um item existente)
 						while (itemDigitado == null) {
-							entrada = JOptionPane.showInputDialog(cardapio.toString() + "\n\nCódigo do item\n\n");
 
-							// Validação do tipo da entrada
+							// Validação da entrada - Deve ser um número inteiro
 							while (!this.intValido(entrada)) {
-								entrada = JOptionPane.showInputDialog(null,
-										"Valor incorreto!\n\nDigite um número inteiro");
+								entrada = JOptionPane.showInputDialog(cardapio.toString() + "\n\nCódigo do item\n\n");
+								if (this.intValido(entrada))
+									codigo = Integer.parseInt(entrada);
+								else
+									JOptionPane.showMessageDialog(null, "Insira um valor válido!", "alerta",
+											JOptionPane.ERROR_MESSAGE);
+
 							}
-							int codigo = Integer.parseInt(entrada);
 
 							// Tenta localizar o item correspondente ao código no cardápio
 							for (Item item : cardapio.getItens()) {
@@ -60,8 +74,11 @@ public class FoodTruck {
 
 							// Se não encontrar, apresenta uma mensagem
 							if (itemDigitado == null) {
-								JOptionPane.showMessageDialog(null, "alerta", "Item não encontrado!",
+								JOptionPane.showMessageDialog(null, "Item não encontrado!", "alerta",
 										JOptionPane.ERROR_MESSAGE);
+								confirma = 1;
+								entrada = null;
+								itemDigitado = null;
 							}
 						}
 
@@ -72,24 +89,27 @@ public class FoodTruck {
 							entrada = JOptionPane
 									.showInputDialog(itemDigitado.toString() + "\n\n" + "Digite a quantidade:\n\n");
 						}
-						int qtde = Integer.parseInt(entrada);
+						qtde = Integer.parseInt(entrada);
 
 						entrada = JOptionPane.showInputDialog("Observação:\n\n");
-						String obs = entrada;
+						obs = entrada;
 
 						// Tela de confirmação
-
 						String textoDoPedido = itemDigitado.getNome() + " (" + qtde + ") " + " (" + obs + ")";
 
 						confirma = JOptionPane.showConfirmDialog(null,
-								"Confira o pedido.\n\n" + textoDoPedido + "\n\nConfirma?\n\n", "Confirmação",
+								"Confira o item\n\n" + textoDoPedido + "\n\nConfirma?\n\n", "Confirmação",
 								JOptionPane.YES_NO_OPTION);
 					}
-					
+
+					// Insere o item do pedido na lista
+					ItemPedido itemPedido = new ItemPedido(itemDigitado, qtde, obs);
+					itensDoPedido.add(itemPedido);
+
 					// Inserir mais itens
 					continua = JOptionPane.showConfirmDialog(null, "Deseja inserir mais algum item?\n\n", "Confirmação",
 							JOptionPane.YES_NO_OPTION);
-					
+
 					// Reseta as variáveis para o próximo item
 					confirma = 1;
 					entrada = null;
@@ -97,14 +117,30 @@ public class FoodTruck {
 
 				} while (continua == 0);
 
-				// Lança o pedido
-				if (confirma == 0) {
-					// Pedido pedido = new Pedido();
-					JOptionPane.showMessageDialog(null, "Pedido Numero <> Lançado", "Pedido Lançado",
-							JOptionPane.INFORMATION_MESSAGE);
+				// Utiliza StringBuilder para concatenar dinamicamente os itens do pedido
+				StringBuilder resumoPedido = new StringBuilder("");
+				int sequencia = 1;
+
+				for (ItemPedido itemPedido : itensDoPedido) {
+					resumoPedido.append(sequencia + "- " + itemPedido.getItem().getNome() + " - " + itemPedido.getQtde()
+							+ " - " + itemPedido.getObs() + "\n");
+					sequencia++;
 				}
+				
+				// Cria o pedido e insere a lista de itens
+				Pedido pedido = new Pedido(itensDoPedido);
+				
+				resumoPedido.append("\n\nTotal: R$ " + pedido.getTotal() + "\n\n");
+
+				// Exibe o numero do pedido criado e o resumo do mesmo
+				JOptionPane.showMessageDialog(null,
+						"Pedido Numero " + pedido.getCodigo() + ": Lançado no Sistema\n\n" + resumoPedido.toString(),
+						"Pedido Lançado", JOptionPane.INFORMATION_MESSAGE);
 
 				break;
+
+			// 2- Visualizar pedido
+			// ------------------------------------------------------------------------------------
 			case 2:
 				break;
 			case 3:
