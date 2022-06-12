@@ -147,4 +147,8 @@ public class Cardapio {
 		this.itens = itens;
 	}
 
+	public void resetaCodigoItem() {
+		Item.setCodigo(itens.size());
+	}
+
 }

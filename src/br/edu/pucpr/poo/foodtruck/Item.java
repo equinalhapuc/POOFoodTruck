@@ -46,4 +46,8 @@ public abstract class Item implements Serializable {
 		return item.getCodigo() == this.getCodigo();
 
 	}
+
+	protected static void setCodigo(int codigo) {
+		Item.codigo = codigo;
+	}
 }

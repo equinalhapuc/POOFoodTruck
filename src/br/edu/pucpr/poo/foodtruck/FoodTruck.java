@@ -13,6 +13,7 @@ public class FoodTruck {
 
 	public FoodTruck() {
 		cardapio.recupera();
+		cardapio.resetaCodigoItem();
 	}
 
 	public static void main(String[] args) {
@@ -266,34 +267,137 @@ public class FoodTruck {
 
 				// Tenta alterar o status do pedido
 				try {
-					
+
 					// Cria um vetor com as opções possíveis de status de um pedido
 					StatusPedido[] opcoes = { StatusPedido.LANCADO, StatusPedido.PREPARANDO, StatusPedido.PRONTO,
 							StatusPedido.ENTREGUE };
-					
+
 					// Exibe uma tela para a seleção do novo status do pedido
-					Object novoStatus = JOptionPane.showInputDialog(null, "Status do pedido: " + pedido.getStatus() + "\n\nEscolha o novo status", "Status do pedido",
+					Object novoStatus = JOptionPane.showInputDialog(null,
+							"Status do pedido: " + pedido.getStatus() + "\n\nEscolha o novo status", "Status do pedido",
 							JOptionPane.INFORMATION_MESSAGE, null, opcoes, opcoes[0]);
-					
+
 					// Altera o status do pedido
 					pedido.setStatus(novoStatus.toString());
-					
-				// Caso não tenha encontrado o pedido, exibe uma mensagem
+
+					// Caso não tenha encontrado o pedido, exibe uma mensagem
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Pedido não encontrado!", "alerta", JOptionPane.ERROR_MESSAGE);
 				}
 
 				break;
 			// Fim do código da opção 3 do menu principal: Alterar o status de um pedido
-			
+
 			// 4- Exibe o cardápio ----------------------------------
 			case 4:
-				entrada = JOptionPane.showInputDialog(cardapio.toString() + "\n\n");
+				JOptionPane.showMessageDialog(null, cardapio.toString() + "\n\n", "Cardápio",
+						JOptionPane.INFORMATION_MESSAGE);
 				break;
-			// Fim do código da opção 3 do menu principal: Exibe o cardápio
-			
+			// Fim do código da opção 4 do menu principal: Exibe o cardápio
+
+			// 5- Inserir um novo item no cardápio ----------------------------------
 			case 5:
+				// Cria um vetor com as opções possíves de se escolher na próxima tela
+				String[] tipo = { "Lanche", "Bebida", "Acompanhamento" };
+
+				// Exibe uma tela para a seleção do tipo do item
+				Object novoItem = JOptionPane.showInputDialog(null, "Tipo do item:", "Inserir novo item",
+						JOptionPane.INFORMATION_MESSAGE, null, tipo, tipo[0]);
+
+				// Inicializa as variáveis
+				String nome = "";
+				String descricao = "";
+				double preco = 0;
+				int tamanho = 0;
+				
+				// Reseta a variável de entrada do usuário
+				entrada = null;
+				
+				// Avalia a opção escolhida
+				switch (novoItem.toString()) {
+				case "Lanche":
+					// Nome
+					 nome = JOptionPane.showInputDialog("Nome do lanche:\n\n");
+					// Descrição
+					 descricao = JOptionPane.showInputDialog("Descrição:\n\n");
+					// Preço
+					 while(!doubleValido(entrada)) {
+						 entrada = JOptionPane.showInputDialog("Preço: R$\n\n");
+						 if(doubleValido(entrada)) {
+							 preco = Double.parseDouble(entrada);
+						 }
+					 }
+					 
+					 // Cria um novo lanche com os dados fornecidos
+					 Lanche lanche = new Lanche(nome, preco, descricao);
+					 
+					 // Adiciona no cardápio
+					 cardapio.inserirItem(lanche);
+					 
+					 // Salva o cardápio no arquivo
+					 cardapio.grava();
+					 
+					break;
+				case "Bebida":
+					// Nome
+					 nome = JOptionPane.showInputDialog("Nome da bebida:\n\n");
+					 
+					// Tamanho
+					 while(!intValido(entrada)) {
+						 entrada = JOptionPane.showInputDialog("Tamanho em mL:\n\n");
+						 if(intValido(entrada)) {
+							 tamanho = Integer.parseInt(entrada);
+						 }
+					 }
+					 entrada = null;
+					// Preço
+					 while(!doubleValido(entrada)) {
+						 entrada = JOptionPane.showInputDialog("Preço: R$\n\n");
+						 if(doubleValido(entrada)) {
+							 preco = Double.parseDouble(entrada);
+						 }
+					 }
+					 
+					 // Cria uma nova bebida com os dados fornecidos
+					 Bebida bebida = new Bebida(nome, preco, tamanho);
+					 
+					 // Adiciona no cardápio
+					 cardapio.inserirItem(bebida);
+					 
+					 // Salva o cardápio no arquivo
+					 cardapio.grava();
+					break;
+				case "Acompanhamento":
+					entrada = null;
+					// Nome
+					 nome = JOptionPane.showInputDialog("Nome do acompanhamento:\n\n");
+					// Descrição
+					 descricao = JOptionPane.showInputDialog("Descrição:\n\n");
+					// Preço
+					 while(!doubleValido(entrada)) {
+						 entrada = JOptionPane.showInputDialog("Preço: R$\n\n");
+						 if(doubleValido(entrada)) {
+							 preco = Double.parseDouble(entrada);
+						 }
+					 }
+					 
+					 // Cria um novo lanche com os dados fornecidos
+					 Acompanhamento acompanhamento = new Acompanhamento(nome, preco, descricao);
+					 
+					 // Adiciona no cardápio
+					 cardapio.inserirItem(acompanhamento);
+					 
+					 // Salva o cardápio no arquivo
+					 cardapio.grava();
+					 
+					break;
+				default:
+					break;
+				}
+
 				break;
+			// Fim do código da opção 5 do menu principal: Inserir um novo item no cardápio
+
 			case 6:
 				break;
 			case 7:
@@ -336,9 +440,18 @@ public class FoodTruck {
 
 	private boolean intValido(String s) {
 		try {
-			Integer.parseInt(s); // Método estático, que tenta tranformar uma string em inteiro
+			Integer.parseInt(s);
 			return true;
-		} catch (NumberFormatException e) { // Nãoo conseguiu tranformar em inteiro e gera erro
+		} catch (NumberFormatException | NullPointerException e) {
+			return false;
+		}
+	}
+	
+	private boolean doubleValido(String s) {
+		try {
+			Double.parseDouble(s);
+			return true;
+		} catch (NumberFormatException | NullPointerException e) {
 			return false;
 		}
 	}
