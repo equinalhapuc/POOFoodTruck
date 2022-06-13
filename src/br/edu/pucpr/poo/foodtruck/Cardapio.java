@@ -125,12 +125,13 @@ public class Cardapio {
 
 		// "Try with resources" disponível a partir do java 1.7. O .close() e o
 		// finally() são implícitos
+		// https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("cardapio.bin"))) {
 			for (Item item : itens) {
 				oos.writeObject(item);
 			}
 		} catch (Exception e) {
-			System.out.println("Erro: " + e);
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 	
