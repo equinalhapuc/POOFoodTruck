@@ -6,7 +6,7 @@ import java.util.Formatter;
  * <p>
  * Refrigerantes, cervejas, sucos, etc...
  * @param Nome, preço, tamanho em ml
- * @author Eduardo Quinalha
+ * @author Eduardo Quinalha, André Augusto Neves, André Yuji Duarte Kunitake
  * @version 1.0
  *
  */

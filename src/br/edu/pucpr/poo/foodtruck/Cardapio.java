@@ -9,6 +9,13 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.NoSuchElementException;
 
+/**
+ * Classe que representa o cardápio
+ * <p>
+ * @author Eduardo Quinalha, André Augusto Neves, André Yuji Duarte Kunitake
+ * @version 1.0
+ *
+ */
 public class Cardapio {
 	// Polimorfismo
 	private ArrayList<Item> itens = new ArrayList<>();
@@ -127,6 +134,10 @@ public class Cardapio {
 		}
 	}
 	
+	/**
+	 * Recupera os itens do cardápio a partir do arquivo cardapio.bin
+	 * @return void
+	 */
 	public void recupera(){
 		ArrayList<Item> itens = new ArrayList<>();
 		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("cardapio.bin"))) {
@@ -147,10 +158,18 @@ public class Cardapio {
 		this.itens = itens;
 	}
 
+	/**
+	 * Inicia o atributo estático da classe Item com um valor coerente, a fim de não gerar itens com o mesmo código
+	 * @return void
+	 */
 	public void resetaCodigoItem() {
 		Item.setCodigo(itens.size());
 	}
 
+	/**
+	 * Recupera o cardápio original do sistema a partir do arquivo cardapiooriginal.bin
+	 * @return void
+	 */
 	public void recuperaOriginal() {
 		itens.clear();
 		ArrayList<Item> itens = new ArrayList<>();
@@ -172,6 +191,10 @@ public class Cardapio {
 		this.itens = itens;
 	}
 
+	/**
+	 * Grava o cardápio atual no arquivo cardapiooriginal.bin
+	 * @return void
+	 */
 	public void gravaOriginal() {
 
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("cardapiooriginal.bin"))) {

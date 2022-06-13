@@ -1,5 +1,13 @@
 package br.edu.pucpr.poo.foodtruck;
 
+/**
+ * Esta classe serve apenas para teste da classe cardápio e gerar o cardápio original do sistema
+ * <p>
+ * @param Nome, preço, descrição
+ * @author Eduardo Quinalha, André Augusto Neves, André Yuji Duarte Kunitake
+ * @version 1.0
+ *
+ */
 public class GeraCardapio {
 
 	public static void main(String[] args) {

@@ -7,7 +7,7 @@ import java.util.Formatter;
  * <p>
  * Acompanhamentos podem ser, batatas fritas, onion rings, salgados, petiscos, entre outros...
  * @param Nome, preço, descrição
- * @author Eduardo Quinalha
+ * @author Eduardo Quinalha, André Augusto Neves, André Yuji Duarte Kunitake
  * @version 1.0
  *
  */

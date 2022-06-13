@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Qualquer item do cardápio do Food Truck
  * 
  * @param Nome, preço, descrição
- * @author Eduardo Quinalha
+ * @author Eduardo Quinalha, André Augusto Neves, André Yuji Duarte Kunitake
  * @version 1.0
  *
  */

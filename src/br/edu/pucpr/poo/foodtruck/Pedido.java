@@ -2,6 +2,15 @@ package br.edu.pucpr.poo.foodtruck;
 
 import java.util.List;
 
+/**
+ * Classe que representa um pedido
+ * <p>
+ * 
+ * @param List<ItemPedido>
+ * @author Eduardo Quinalha, André Augusto Neves, André Yuji Duarte Kunitake
+ * @version 1.0
+ *
+ */
 public class Pedido {
 	private static int codigo = 0;
 	private StatusPedido status;

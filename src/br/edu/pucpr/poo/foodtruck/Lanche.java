@@ -6,7 +6,7 @@ import java.util.Formatter;
  * <p>
  * Item principal do cardápio. X-Burgueres, X-saladas, Hot-dog, pizzas, etc...
  * @param Nome, preço, descrição
- * @author Eduardo Quinalha
+ * @author Eduardo Quinalha, André Augusto Neves, André Yuji Duarte Kunitake
  * @version 1.0
  *
  */
