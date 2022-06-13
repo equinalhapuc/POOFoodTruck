@@ -9,11 +9,19 @@ public class FoodTruck {
 	private Cardapio cardapio = new Cardapio();
 	private List<Pedido> pedidos = new ArrayList<Pedido>();
 
+	/**
+	 * Contrutor da classe FoodTruck
+	 * Utilizado para inicializar o cardápio
+	 */
 	public FoodTruck() {
 		cardapio.recupera();
 		cardapio.resetaCodigoItem();
 	}
 
+	/**
+	 * Classe main
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		FoodTruck meuFoodTruck = new FoodTruck();
@@ -21,6 +29,9 @@ public class FoodTruck {
 
 	}
 
+	/**
+	 * Exibe o menu principal do sistema
+	 */
 	public void menuPrincipal() {
 		// Texto do menu principal
 		String textoMenu = "1- Lançar novo pedido\n" + "2- Visualizar pedido\n" + "3- Alterar status de um pedido\n"
@@ -70,7 +81,7 @@ public class FoodTruck {
 				break;
 			
 			case 6: // 6- Remover item do cardápio
-				this.removeItemDoCardapio(cardapio, opt);
+				this.removeItemDoCardapio();
 				break;
 				
 			case 7: // 7- Sair
@@ -88,6 +99,9 @@ public class FoodTruck {
 		} while (opt != 7);
 	}
 
+	/**
+	 * Apresenta uma sequencia de telas para capturar dados e inserir um novo item no cardápio
+	 */
 	public void insereItemNoCardapio() {
 		
 		boolean sair = false;
@@ -177,6 +191,7 @@ public class FoodTruck {
 			// Salva o cardápio no arquivo
 			cardapio.grava();
 			break;
+			
 		case "Acompanhamento":
 			entrada = null;
 			// Nome
@@ -191,7 +206,7 @@ public class FoodTruck {
 				}
 			}
 
-			// Cria um novo lanche com os dados fornecidos
+			// Cria um novo Acompanhamento com os dados fornecidos
 			Acompanhamento acompanhamento = new Acompanhamento(nome, preco, descricao);
 
 			// Adiciona no cardápio
@@ -199,14 +214,17 @@ public class FoodTruck {
 
 			// Salva o cardápio no arquivo
 			cardapio.grava();
-
 			break;
+			
 		default:
 			break;
 		}
 	}
 
-	public void removeItemDoCardapio(Cardapio cardapio, int codigo) {
+	/**
+	 * Remove um item do cardápio
+	 */
+	public void removeItemDoCardapio() {
 		
 		// Reseta as variáveis
 		String entrada = null;
@@ -245,16 +263,24 @@ public class FoodTruck {
 						JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
-			// Caso não localize o item, exibe uma mensagem
+		// Caso não localize o item, exibe uma mensagem
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Item não encontrado!", "alerta", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
-	public void visualizarCardapio(Cardapio cardapio) {
+	/**
+	 * 
+	 * Exibe o cardápio
+	 */
+	public void visualizarCardapio() {
 		System.out.println(cardapio);
 	}
 
+	
+	/**
+	 * Lança um novo pedido no sistema
+	 */
 	public void novoPedido() {
 		// Esta variável recebe a confirmação de cada item do pedido, permitindo
 		// prosseguir
@@ -265,9 +291,6 @@ public class FoodTruck {
 
 		// Esta variável vai armazenar o item selecionado, caso ele exista
 		Item itemDigitado = null;
-
-		// Esta variável armazena o código de pedido digitado pelo operador
-		int codigoDigitado = -1;
 
 		// Esta variável recebe o código do item desejado, digitado pelo operador
 		int codigo = -1;
@@ -403,6 +426,9 @@ public class FoodTruck {
 				"Pedido Lançado", JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	/**
+	 * Visualiza um pedido
+	 */
 	public void visualizaPedido() {
 		// Esta variável armazena o código digitado pelo operador
 		int codigoDigitado = 0;
@@ -465,6 +491,9 @@ public class FoodTruck {
 		}
 	}
 
+	/**
+	 * Altera status de um pedido
+	 */
 	public void alteraStatusDoPedido() {
 		// Esta variável armazena o código digitado pelo operador
 		int codigoDigitado = 0;
@@ -519,6 +548,11 @@ public class FoodTruck {
 		}
 	}
 
+	/**
+	 * 
+	 * @param s - Uma string originária de uma entrada de usuário
+	 * @return true - É um int; false - Não é um int
+	 */
 	private boolean intValido(String s) {
 		try {
 			Integer.parseInt(s);
@@ -528,6 +562,11 @@ public class FoodTruck {
 		}
 	}
 
+	/**
+	 * 
+	 * @param s - Uma string originária de uma entrada de usuário
+	 * @return true - É um double; false - Não é um double
+	 */
 	private boolean doubleValido(String s) {
 		try {
 			Double.parseDouble(s);
@@ -537,7 +576,12 @@ public class FoodTruck {
 		}
 	}
 
-	public int retornaInteiro(String entrada) { // retorna um valor inteiro
+	/**
+	 * 
+	 * @param s - Uma string originária de uma entrada de usuário
+	 * @return inteiro parseado a partir da entrada
+	 */
+	public int retornaInteiro(String entrada) {
 
 		while (!this.intValido(entrada)) {
 			entrada = JOptionPane.showInputDialog(null, "Valor incorreto!\n\nDigite um número inteiro entre 1 e 7");
