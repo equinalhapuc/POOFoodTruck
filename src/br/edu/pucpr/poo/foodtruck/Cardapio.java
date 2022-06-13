@@ -151,4 +151,37 @@ public class Cardapio {
 		Item.setCodigo(itens.size());
 	}
 
+	public void recuperaOriginal() {
+		itens.clear();
+		ArrayList<Item> itens = new ArrayList<>();
+		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("cardapiooriginal.bin"))) {
+			Object input = null;
+			while ((input = ois.readObject()) != null) {
+				if(input instanceof Acompanhamento)
+					itens.add((Acompanhamento) input);
+				else if (input instanceof Bebida)
+					itens.add((Bebida) input);
+				else
+					itens.add((Lanche) input);
+			}
+		} catch (EOFException e) {
+			System.out.println();
+		} catch (Exception e) {
+			System.out.println("Erro: " + e);
+		}
+		this.itens = itens;
+	}
+
+	public void gravaOriginal() {
+
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("cardapiooriginal.bin"))) {
+			for (Item item : itens) {
+				oos.writeObject(item);
+			}
+		} catch (Exception e) {
+			System.out.println("Erro: " + e);
+		}
+		
+	}
+
 }
