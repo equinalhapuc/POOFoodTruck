@@ -416,7 +416,7 @@ public class FoodTruck {
 
 		// Adiciona o pedido na lista de pedidos do sistema
 		pedidos.add(pedido);
-
+		
 		// Adiciona na última linha do resumo, o valor total do pedido
 		resumoPedido.append("\n\nTotal: R$ " + pedido.getTotal() + "\n\n");
 

@@ -12,14 +12,16 @@ import java.util.List;
  *
  */
 public class Pedido {
-	private static int codigo = 0;
+	private static int ultimoCodigo = 0;
+	private int codigo;
 	private StatusPedido status;
 	List<ItemPedido> itens;
 
 	public Pedido(List<ItemPedido> itens) {
-		codigo++;
+		ultimoCodigo++;
 		this.status = StatusPedido.LANCADO;
 		this.itens = itens;
+		this.codigo = ultimoCodigo;
 	}
 
 	public StatusPedido getStatus() {
@@ -31,7 +33,7 @@ public class Pedido {
 	}
 
 	public int getCodigo() {
-		return codigo;
+		return this.codigo;
 	}
 
 	public List<ItemPedido> getItens() {
