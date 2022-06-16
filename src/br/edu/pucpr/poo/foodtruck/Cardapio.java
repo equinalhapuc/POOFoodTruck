@@ -118,7 +118,7 @@ public class Cardapio {
 	}
 
 	/**
-	 * Grava o cardápio no arquivo <i>dados.bin</i>, na pasta raíz do projeto
+	 * Grava o cardápio no arquivo <i>cardapio.bin</i>, na pasta raíz do projeto
 	 * @return void
 	 */
 	public void grava() {
