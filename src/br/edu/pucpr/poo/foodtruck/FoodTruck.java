@@ -18,6 +18,7 @@ public class FoodTruck {
 		cardapio.resetaCodigoItem();
 	}
 
+	
 	/**
 	 * Classe main
 	 * @param args
